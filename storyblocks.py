@@ -41,7 +41,8 @@ def get_random_video_url(keywords, quality = "_180p"):
     length_of_results = len(res.json()['results'])
 
     if(length_of_results == 0):
-        return "NO RESULTS FOUND"
+        print(f"NO RESULTS FOUND FOR KEY WORDS '{keywords}'. RETURNING NONE")
+        return None
 
     index = random.randint(0, length_of_results - 1)
     return res.json()['results'][index]['preview_urls'][quality]
