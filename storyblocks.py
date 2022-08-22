@@ -47,11 +47,16 @@ def get_random_video_url(keywords, quality = "_180p"):
     index = random.randint(0, length_of_results - 1)
     return res.json()['results'][index]['preview_urls'][quality]
 
-# Returns random .mp4 file from keywords
+# Downloads random .mp4 file from keywords. Returns true if successful, false otherwise
 def download_random_video(keywords, path, quality = "_180p"):
     url = get_random_video_url(keywords, quality)
+
+    if(url == None):
+        return False
+
     r = requests.get(url, allow_redirects=True)
     open(path, 'wb').write(r.content)
+    return True
 
 def get_HMAC(expires):
     baseUrl = "https://api.videoblocks.com"
